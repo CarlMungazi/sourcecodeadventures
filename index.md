@@ -11,8 +11,8 @@ title: Source Code Adventures
 
 <div class="blog-header">
 	 <h4 class="above-title">{{post.date | date: "%B %-d, %Y"}}</h4>
-	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-	<p>{{ post.excerpt | remove: '</p>' }} <a href="{{ post.url }}"><!--Read the full post! &raquo;-->></a> 
+	<h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+	<p>{{ post.excerpt | remove: '</p>' }} <a href="{{ site.baseurl }}{{ post.url }}"><!--Read the full post! &raquo;-->></a> 
 
 
 {% endfor %}
