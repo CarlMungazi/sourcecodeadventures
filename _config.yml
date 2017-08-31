@@ -1,3 +1,16 @@
-theme: jekyll-theme-minimal
-title: [Source Code Adventures]
-description: [Exploring code through reading and writing about it]
+name: Source Code Adventures
+description: Digging deep into the code that runs the web
+baseurl: ""
+permalink: :categories/:title
+exclude:
+  - deprecated
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+highlighter: rouge
+markdown: kramdown
+permalink: :categories/:title
+gems:
+  - jekyll-redirect-from
+
+# For local work: bundle exec jekyll serve --watch --baseurl '/proghistdev' or wherever else your local site is located
