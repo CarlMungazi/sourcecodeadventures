@@ -1,6 +1,6 @@
 name: Source Code Adventures
 description: Digging deep into the code that runs the web
-baseurl: ""
+baseurl: "/sourcecodeadventures"
 permalink: :categories/:title
 exclude:
   - deprecated
