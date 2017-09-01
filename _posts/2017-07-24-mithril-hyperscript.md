@@ -5,11 +5,11 @@ categories: posts
 published: true
 ---
 
-Earlier this year at work we re-wrote an internal framework we used to create SPA e-learning courses. After briefly trying out React, Angular 2, Ember and Vue, we settled on mithril (https://mithril.js.org). If I were to compare it to the frameworks we tried out, I would say it's more like React but with a simpler, smaller codebase. *By the way, if you like geeking out on code articles, the articles from mithril's old site have some real nuggets of gold (http://lhorie.github.io/mithril-blog/)*.
-a
-A few months after the re-write was done, I dug into mithril's codebase to gain a deeper understanding and this is what I found...
+*Earlier this year at work we re-wrote an internal framework we used to create SPA e-learning courses. After briefly trying out React, Angular 2, Ember and Vue, we settled on [mithril](https://mithril.js.org). If I were to compare it to the frameworks we tried out, I would say it's more like React but with a simpler, smaller codebase. By the way, if you like geeking out on code articles, the articles from mithril's old site have some real nuggets of [gold](http://lhorie.github.io/mithril-blog/). A few months after the re-write was done, I dug into mithril's codebase to gain a deeper understanding and this is what I found...*
 
-The main entry point into mithril's source code is the `m()` function, which is a hyperscript function that, according to the docs (https://mithril.js.org/hyperscript.html), represents an element in a mithril view. It's demonstrated below as:
+---
+
+The main entry point into mithril's source code is the `m()` function, which is a hyperscript function that, according to the [docs](https://mithril.js.org/hyperscript.html), represents an element in a mithril view. It's demonstrated below as:
 ```javascript
 m("div", {id: "box"}, "hello")
 // equivalent HTML:
@@ -50,9 +50,9 @@ function hyperscript(selector) {
 ```
 
 The function takes three arguments: 
-1. a string (css selector) or object (mithril component) 
-2. attributes object (html attributes or element properties)
-3. an array (mithril vnodes), string, number or boolean
+- a string (css selector) or object (mithril component) 
+- attributes object (html attributes or element properties)
+- an array (mithril vnodes), string, number or boolean
 
 The first part of the function is as follows:
 ```javascript
@@ -128,7 +128,7 @@ The last part of the hyperscript function does the following:
 - If the `selector` argument passed into the function is not a string
 	- execute the `Vnode` function with the given arguments
 
-**Reflections:**
+### Reflections:
 1. Reading soure code is **incredibly** difficult BUT rewarding. I still have much to learn but being able to dive into the guts of a framework you use frequently is empowering
 2. Reading source code exposes your blind spots and gives you more material to add to your self-study curriculum. Some of the things I didn't fully understand that I plan to look up include:
 	- Splat arguments

@@ -5,7 +5,7 @@ categories: posts
 published: true
 ---
 
-In my first explainer of Mithril's source code, I broke down how the [hyperscript](https://gist.github.com/CarlMungazi/76d5c384506cebba0afec41985b9905d) function worked. It's main task is the creation of virtual DOM nodes (vnodes), the objects which represent DOM elements or parts of the DOM. So how are these objects created? 
+In my first explainer of Mithril's source code, I broke down how the <a href="{{ site.baseurl }}/posts/mithril-hyperscript">hyperscript </a> function worked. It's main task is the creation of virtual DOM nodes (vnodes), the objects which represent DOM elements or parts of the DOM. So how are these objects created? 
 
 ### Vnode functions
 This is the function which creates a vnode:
@@ -37,7 +37,7 @@ The type of vnode we create is determined by the value of the `tag` property. Th
 - trusted HTML
 - a component
 
-### Element vnode
+### 1. Element vnode
 Let's go through *what* happens when we create each of these types. Suppose I write the following code: `m('div', {class:"foo"}, "Foo")`. The following vnode is created:
 ```javascript
 {
@@ -62,7 +62,7 @@ if (typeof selector === "string") {
 	var cached = selectorCache[selector] || compileSelector(selector)
 }
 ```
-`selectorCache` holds an empty object, so when I use `'div'` for the first time, `selectorCache[selector]` returns `undefined`. And since `undefined` is one of JavaScript's six falsy values, `cached` is assigned the value of `compileSelector(selector)`. Note: the logical operator `||` does not necessarily return a boolean. According to the [JavaScript spec](https://tc39.github.io/ecma262/#prod-LogicalORExpression), "*The value produced by a && or || operator is not necessarily of type Boolean. The value produced will always be the value of one of the two operand expressions.*". It is also worth noting that because `compileSelector` returns the following assignment `selectorCache[selector] = {tag: tag, attrs: attrs}`, `selectorCache[selector]` is no longer `undefined`. In this instance, it returns the following object:
+`selectorCache` holds an empty object, so when I use `'div'` for the first time, `selectorCache[selector]` returns `undefined`. And since `undefined` is one of JavaScript's six falsy values, `cached` is assigned the value of `compileSelector(selector)`. **Note:** the logical operator `||` does not necessarily return a boolean. According to the [JavaScript spec](https://tc39.github.io/ecma262/#prod-LogicalORExpression), "*The value produced by a && or || operator is not necessarily of type Boolean. The value produced will always be the value of one of the two operand expressions.*". It is also worth noting that because `compileSelector` returns the following assignment `selectorCache[selector] = {tag: tag, attrs: attrs}`, `selectorCache[selector]` is no longer `undefined`. In this instance, it returns the following object:
 ```javascript
 {
 	attrs: Object,
@@ -93,7 +93,7 @@ When `m()` creates the vnode, the value of the `tag` property is assigned in the
 }
 ```
 
-### Text vnode
+### 2. Text vnode
 What happens if I write the following code: `m('div', {class:"foo"}, "Foo", "Baz", "Wom", "Bat)`? This will still create a vnode for the `div` DOM element but instead of the `children` property being `undefined`, it will be an array of **four** objects, one for each string I have given as the last four arguments:
 ```javascript
 {
@@ -118,8 +118,8 @@ What happens if I write the following code: `m('div', {class:"foo"}, "Foo", "Baz
 ```
 The `Vnode.normalize` function does this through this `return` statement: `return Vnode("#", undefined, undefined, node === false ? "" : node, undefined, undefined)`. The `#` string signifies that the vnode being created is a text vnode.
 
-### Trusted HTML vnode
-So far we've touched upon `element` and `text` vnodes. Next we'll look at vnodes for `trusted HTML`. Mithril escapes all values by default to prevent cross-site scripting attacks, so the following code: `m('div', "<h1>Here's some <em>HTML</em></h1>")` will be rendered as a `div` with the text `<h1>Here's some <em>HTML</em></h1>`. The vnode looks like:
+### 3. Trusted HTML vnode
+So far we've touched upon `element` and `text` vnodes. Next, we'll look at vnodes for `trusted HTML`. Mithril escapes all values by default to prevent cross-site scripting attacks, so the following code: `m('div', "<h1>Here's some <em>HTML</em></h1>")` will be rendered as a `div`, with the text `<h1>Here's some <em>HTML</em></h1>`. The vnode looks like:
 ```javascript
 {
 	attrs: undefined,
@@ -182,7 +182,7 @@ function(html) {
 ```
 Why are there no error checks to make sure this function receives the `string` argument it deserves? That's taken care off by the rendering process. So if the desired argument is missing, you will definitely hear about it.
 
-### Component vnode
+### 4. Component vnode
 The fourth type of vnode Mithril creates is a `component` vnode. A Mithril component is simply a JavaScript object that has a method called `view`. 
 ```javascript
 var Comp = {
@@ -192,7 +192,7 @@ var Comp = {
 }
 m.render(document.body, m(Comp));
 ```
-So far we've been passing strings as the first argument to `m()`. But because we have now given it an object, it will return this `Vnode(selector, attrs.key, attrs, normalized)` function call instead of `execSelector(cached, attrs, normalized)`, and we end up with this vnode:
+So far, we've been passing strings as the first argument to `m()`. But because we have now given it an object, it will return this `Vnode(selector, attrs.key, attrs, normalized)` function call instead of `execSelector(cached, attrs, normalized)`, and we end up with this vnode:
 ```javascript
 {
 	attrs: Object, // empty
@@ -295,23 +295,25 @@ if (arguments.length === start + 1) {
     - `children` is assigned an array of two objects and another array. How is this possible, I hear you ask? Is the second argument not an array of `m()` calls? That's what I thought but if you `console.log` the `arguments` variable or if you use your browser to debugger to place breakpoints in the `m()` function, you will find that Mithril first deals with the those `m()` calls (turns them into vnode objects). So by the time it comes to dealing with the initial `m('ul', [...])` call, it has a nice array to deal with instead of function calls
     - `children` now holds an array so this nested if statement returns `false`. In plain English, it is asking: "Is `children` NOT an array?"
 
-**3.** The next step is this: `var normalized = Vnode.normalizeChildren(children)`. From our [earlier](https://gist.github.com/CarlMungazi/76d5c384506cebba0afec41985b9905d) deep dive into `m()`, we know that all this function does is apply the `Vnode.normalize` function on every element in our array. So this is what happens to each element:
-    - `Vnode.normalize(node)` applies two conditional checks. If the `node` (the name given to the argument it expects) fails those checks, it is returned in the same state it was entered. The first check is a simple `Array.isArray(node)` check. The second check `node != null && typeof node !== "object"` returns `false` because the first expression returns `true` but the second expression returns `false`. Remember: the `&&` operator needs both expressions to be true for it to return true. The first two elements in `children` are returned as they are because but our third element, the array, is turned into a **fragment vnode** by this: `return Vnode("[", undefined, undefined, Vnode.normalizeChildren(node), undefined, undefined)`. So at the end of this, `normalized` now holds an array of three vnodes - two of which are `element vnodes` and the third a `fragment vnode`
+**3.** The next step is this: `var normalized = Vnode.normalizeChildren(children)`. From our <a href="{{ site.baseurl }}/posts/mithril-hyperscript">earlier </a> deep dive into `m()`, we know that all this function does is apply the `Vnode.normalize` function on every element in our array. So this is what happens to each element:
+- `Vnode.normalize(node)` applies two conditional checks. If the `node` (the name given to the argument it expects) fails those checks, it is returned in the same state it was entered. 
+	- The first check is a simple `Array.isArray(node)` check. 
+	- The second check `node != null && typeof node !== "object"` returns `false` because the first expression returns `true` but the second expression returns `false`. **Remember:** the `&&` operator needs both expressions to be true for it to return true. The first two elements in `children` are returned as they are because but our third element, the array, is turned into a **fragment vnode** by this: `return Vnode("[", undefined, undefined, Vnode.normalizeChildren(node), undefined, undefined)`. So at the end of this, `normalized` now holds an array of three vnodes - two of which are `element vnodes` and the third a `fragment vnode`
 
 **4.** The final step is: `return execSelector(cached, attrs, normalized)` and this returns the object we started with earlier.    
 
-So, in summary, when using Mithril (and I supposed this also extends to other virtual dom frameworks), vnodes are among the most important data structures we work with because they represent the DOM elements painted on screen. Before I dug into the source I used to think of them in somewhat mystical terms but once I realised they were simply objects which happened to be doing a lot of cool stuff, I started approaching them with less trepidation. Also, this deep dive focused exclusively on the *type* of vnodes Mithril creates so when I revisit this topic I will look at the other properties available on vnodes.   
+So, in summary, when using Mithril (and I supposed this also extends to other virtual dom frameworks), vnodes are among the most important data structures because they represent the DOM elements painted on screen. Before I dug into the source, I used to think of them in somewhat mystical terms, but once I realised they were simply objects which happened to be doing a lot of cool stuff, I started approaching them with less trepidation. Also, this deep dive focused exclusively on the *type* of vnodes Mithril creates, so when I revisit this topic I will look at the other properties available on vnodes.   
 
 ### Reflections
 1. A deeper understanding of DOM creation would help me appreciate more how virtual dom works. Links for further study: [this](https://developer.mozilla.org/en-US/docs/Introduction_to_Layout_in_Mozilla) and [this](http://taligarsiel.com/Projects/howbrowserswork1.htm#Parsing_general)
 
 2. I always assumed the `||` check returned a boolean. However, it can actually be used to set default values. Kyle Simpson's book You Don't Know JavaScript has a **LOT** more detail on this in these [two](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch4.md) [chapters](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch5.md)
 
-3. Investigating fragment vnodes lad me to the discovery of the [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) object. You can use this object to append elements to the DOM without causing reflows or repainting. Read [this](https://davidwalsh.name/documentfragment) blog post for more or checkout `document.createDocumentFragment`(https://developer.mozilla.org/en/docs/Web/API/Document/createDocumentFragment)
+3. Investigating fragment vnodes lead me to the discovery of the [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) object. You can use this object to append elements to the DOM without causing reflows or repainting. Read [this](https://davidwalsh.name/documentfragment) blog post for more or check out [this](https://developer.mozilla.org/en/docs/Web/API/Document/createDocumentFragment)
 
-4. I need to study further the subtleties between `!=` and `!==` checks. It keeps cropping up and I need to get a better handle on it. 
+4. I need to study further the subtleties between `!=` and `!==` checks. They keep cropping up and I need to get a better handle on them
 
-5. Stepping through functions calls in the Chrome debugger can make your head hurt! But it's a really useful tool for checking the values and state of different data structures. Definitely a tool to add to the source code reading tool box.
+5. Stepping through functions calls in the Chrome debugger can make your head hurt! But it's a really useful tool for checking the values and state of your program. Definitely a tool to add to the source code reading tool box
 
 6. Digging into the creation of fragment vnodes was by far the most time-consuming part of this exercise. And even though I feel my understanding is still fuzzy, that is a good thing because it means the ideas will only get clearer the more code reading I do
 
