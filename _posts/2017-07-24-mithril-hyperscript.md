@@ -1,15 +1,15 @@
 ---
-title: "Understanding mithril's hyperscript function"
+title: "Understanding Mithril's hyperscript function"
 layout: post
 categories: posts
 published: true
 ---
 
-*Earlier this year at work we re-wrote an internal framework we used to create SPA e-learning courses. After briefly trying out React, Angular 2, Ember and Vue, we settled on [mithril](https://mithril.js.org). If I were to compare it to the frameworks we tried out, I would say it's more like React but with a simpler, smaller codebase. By the way, if you like geeking out on code articles, the articles from mithril's old site have some real nuggets of [gold](http://lhorie.github.io/mithril-blog/). A few months after the re-write was done, I dug into mithril's codebase to gain a deeper understanding and this is what I found...*
+*Earlier this year at work we re-wrote an internal framework we used to create SPA e-learning courses. After briefly trying out React, Angular 2, Ember and Vue, we settled on [Mithril](https://mithril.js.org). If I were to compare it to the frameworks we tried out, I would say it's more like React but with a simpler, smaller codebase. By the way, if you like geeking out on code articles, the articles from Mithril's old site have some real nuggets of [gold](http://lhorie.github.io/mithril-blog/). A few months after the re-write was done, I dug into Mithril's codebase to gain a deeper understanding and this is what I found...*
 
 ---
 
-The main entry point into mithril's source code is the `m()` function, which is a hyperscript function that, according to the [docs](https://mithril.js.org/hyperscript.html), represents an element in a mithril view. It's demonstrated below as:
+The main entry point into Mithril's source code is the `m()` function, which is a hyperscript function that, according to the [docs](https://mithril.js.org/hyperscript.html), represents an element in a Mithril view. It's demonstrated below as:
 ```javascript
 m("div", {id: "box"}, "hello")
 // equivalent HTML:
@@ -50,9 +50,9 @@ function hyperscript(selector) {
 ```
 
 The function takes three arguments: 
-- a string (css selector) or object (mithril component) 
+- a string (css selector) or object (Mithril component) 
 - attributes object (html attributes or element properties)
-- an array (mithril vnodes), string, number or boolean
+- an array (Mithril vnodes), string, number or boolean
 
 The first part of the function is as follows:
 ```javascript
@@ -105,8 +105,8 @@ if (arguments.length === start + 1) {
 }
 ```
 This if statement is doing the following:
-- If we have been given three arguments, we assign the third argument (which can be an array (mithril vnodes), string, number or boolean) to the `children` variable. And if this third argument is not an array, we turn it into one.
-- If we have not been given three arguments we assign an empty array to `children`. The while statement only runs in the event we have splat arguments (if the argument is an array, you can omit the square brackets and have a variable number of arguments in the method instead). A splat argument in the context of this function means that `m("div", {id: "foo"}, ["a", "b", "c"])` can also be written as `m("div", {id: "foo"}, "a", "b", "c")`, which is essentially what we do in mithril a lot. At the end of this, `children` holds an array of the arguments passed into the function.
+- If we have been given three arguments, we assign the third argument (which can be an array (Mithril vnodes), string, number or boolean) to the `children` variable. And if this third argument is not an array, we turn it into one.
+- If we have not been given three arguments we assign an empty array to `children`. The while statement only runs in the event we have splat arguments (if the argument is an array, you can omit the square brackets and have a variable number of arguments in the method instead). A splat argument in the context of this function means that `m("div", {id: "foo"}, ["a", "b", "c"])` can also be written as `m("div", {id: "foo"}, "a", "b", "c")`, which is essentially what we do in Mithril a lot. At the end of this, `children` holds an array of the arguments passed into the function.
 
 ```javascript
 var normalized = Vnode.normalizeChildren(children)
@@ -135,5 +135,5 @@ The last part of the hyperscript function does the following:
 	- The difference between `throw Error` and `throw new Error` (Edit: According to the [JS spec](http://www.ecma-international.org/ecma-262/7.0/#sec-error-constructor), there is no difference) 
 3. When reading source code the first time round, worry more about the *what* instead of the *why*. When I came to the `normalized` variable assignment I ended up doing a bit of a deep dive into the `Vnode.normalizeChildren` and `Vnode.normalize` functions by spinning up some example code and logging the results of different statements. I should have simply stated what those functions did and moved on because it was clear enough.
 4. What I learnt that I did not know before: 
-	- `!==` checks if the variables given hold the same **value** and are the same **type**, whilst `!=` only checks if the variables given hold the same **values** (comparing reference values adds some further subtlety which I hope to tackle some other time. H/t to [@pakx](https://github.com/pakx) for pointing this out in the mithril [gitter chat](https://gitter.im/mithriljs/mithril.js)) 
+	- `!==` checks if the variables given hold the same **value** and are the same **type**, whilst `!=` only checks if the variables given hold the same **values** (comparing reference values adds some further subtlety which I hope to tackle some other time. H/t to [@pakx](https://github.com/pakx) for pointing this out in the Mithril [gitter chat](https://gitter.im/mithriljs/mithril.js)) 
 	- The source of this error message: `"The selector must be either a string or a component."`

@@ -1,11 +1,11 @@
 ---
-title: "Recommendations from mithril's docs"
+title: "Recommendations from Mithril's docs"
 layout: post
 categories: posts
 published: true
 ---
 
-Before reading a library or framework's source code, it's advisable to go through the documentation. Thankfully, mithril's size means reading through the main APIs is not that arduous a task. When reading the docs, you will often find notes from the author(s) recommending different ways of using the available features. This is useful when you read the source because you can more easily understand *why* certain bits of code exist. I've noted below five recommendations I came across during my latest round of reading the mithril docs. I found more than five but I'll go through the rest at a later time. The example code below each recommendation has been taken from the docs.
+Before reading a library or framework's source code, it's advisable to go through the documentation. Thankfully, Mithril's size means reading through the main APIs is not that arduous a task. When reading the docs, you will often find notes from the author(s) recommending different ways of using the available features. This is useful when you read the source because you can more easily understand *why* certain bits of code exist. I've noted below five recommendations I came across during my latest round of reading the Mithril docs. I found more than five but I'll go through the rest at a later time. The example code below each recommendation has been taken from the docs.
 
 - **Use CSS selectors for attributes with unchanging values and pass an attributes object for attributes with values that can change**
 
@@ -31,7 +31,7 @@ m("ul", users.map(function(u) { // <ul>
 })) 
 ```
 
-- **Conditionally set the content in a mithril view by using a ternary operator**
+- **Conditionally set the content in a Mithril view by using a ternary operator**
 
 ```javascript
 var isError = false
@@ -61,7 +61,7 @@ function(redrawService) {
 }
 ```
 
-- **When using `m.route`, improve the user's navigation experience by taking advantange of the [`history.pushState`](https://developer.mozilla.org/en-US/docs/Web/API/History_API) API to 'remember' the state of things such as large forms. If the user nagivates away for whatever reason, the form is filled in when they return to that page. Example in the mithril docs can be found [here](https://mithril.js.org/route.html#history-state) and below.**
+- **When using `m.route`, improve the user's navigation experience by taking advantange of the [`history.pushState`](https://developer.mozilla.org/en-US/docs/Web/API/History_API) API to 'remember' the state of things such as large forms. If the user nagivates away for whatever reason, the form is filled in when they return to that page. Example in the Mithril docs can be found [here](https://mithril.js.org/route.html#history-state) and below.**
 
 ```javascript
 var state = {
