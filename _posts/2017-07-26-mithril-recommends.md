@@ -1,5 +1,5 @@
 ---
-title: "Recommendations from Mithril's docs"
+title: "Mithril.js: What do the docs recommend?"
 layout: post
 categories: posts
 published: true

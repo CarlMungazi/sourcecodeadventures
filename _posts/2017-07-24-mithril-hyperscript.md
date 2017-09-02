@@ -1,5 +1,5 @@
 ---
-title: "Understanding Mithril's hyperscript function"
+title: "Mithril.js: Understanding the hyperscript function"
 layout: post
 categories: posts
 published: true

@@ -253,19 +253,19 @@ Blog Index and Layout
 Footer
 ========================================================================== */
 
-  footer[role="contentinfo"] {
+  footer {
     margin-top: 2rem;
-    padding: 2rem 0;
+    padding: .6rem 1rem;
     font-family:'Open Sans';
     font-size:.9rem;
-    color:#ccc;
-    background-color:#666;
+    color:#fff;
+    background-color:#27b;
     text-align:center;
   }
 
   footer a, footer a:link, footer a:visited {
-    color: #fff;
-    border-bottom:1px #eee dotted;
+    color: #333;
+    border-bottom:1px #333 solid;
   }
 
   footer a:hover {
@@ -277,22 +277,13 @@ Footer
     margin: 0 .2rem 0rem 0rem;
   }
 
-  .footer-head {
+  .footer-text {
     font-size:1.1rem;
     line-height:1.4rem;
     margin-bottom:1rem;
   }
 
 } /* end screen */
-
-@media only screen and (max-width: 768px) {
-  .garnish {
-    display:none;
-  }
-  .dropdown-menu:after, .dropdown-menu:before {
-    display:none;
-  }
-}
 
 @media print {
   * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */

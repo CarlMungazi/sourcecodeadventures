@@ -1,5 +1,5 @@
 ---
-title: "Mithril vnodes"
+title: "Mithril.js: What are vnodes?"
 layout: post
 categories: posts
 published: true
@@ -214,7 +214,7 @@ So far, we've been passing strings as the first argument to `m()`. But because w
 }
 ```
 
-### Fragment vnode
+### 5. Fragment vnode
 Lastly, and definitely not least, we have fragment vnodes. Here is what the docs say about them: *Represents a list of DOM elements whose parent DOM element may also contain other elements that are not in the fragment. When using the m() helper function, fragment vnodes can only be created by nesting arrays into the children parameter of m(). m("[") does not create a valid vnode.* The docs for the `m.fragment` call (which also creates fragment vnodes but then also gives them an attributes object) has the following example of how you could construct fragment vnodes:
 ```javascript
 var groupVisible = true
