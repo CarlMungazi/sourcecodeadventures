@@ -1,10 +1,4 @@
-{% comment %}
-
-Add machine-readable publication metadata for each page that allows lessons to be processed by e.g. Zotero
-
-{% endcomment %}
-
-<meta name="citation_title" content="{{ page.title }}" />
-<meta name="citation_publication_date" content="{{ page.date }}" />
-<meta name="citation_journal_title" content="{{ site.name }}" />
-<meta name="citation_public_url" content="{{ site.url }}{{ page.url }}" />
+<meta name="title" content="{{ page.title }}" />
+<meta name="publication_date" content="{{ page.date }}" />
+<meta name="journal_title" content="{{ site.name }}" />
+<meta name="public_url" content="{{ site.url }}{{ page.url }}" />

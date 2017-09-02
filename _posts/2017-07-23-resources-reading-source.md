@@ -7,6 +7,8 @@ published: true
 
 Learning how to read source code has become a hobby of mine lately (and a sometimes painful one at that). In the course of my reading I have come across a number of blogs and articles on the subject which have been helpful, so I created this article to keep track of them.
 
+---
+
 **How to read source code**
 - [Use the source, don't read it](http://blog.ezyang.com/2012/04/use-the-source-dont-read-it/)
 - [Tips For Reading Code](http://wiki.c2.com/?TipsForReadingCode)

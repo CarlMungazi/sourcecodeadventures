@@ -3,14 +3,9 @@ description: Digging deep into the code that runs the web
 baseurl: "/sourcecodeadventures"
 permalink: :categories/:title
 exclude:
-  - deprecated
   - vendor
   - Gemfile
   - Gemfile.lock
 highlighter: rouge
 markdown: kramdown
 permalink: :categories/:title
-gems:
-  - jekyll-redirect-from
-
-# For local work: bundle exec jekyll serve --watch --baseurl '/proghistdev' or wherever else your local site is located
