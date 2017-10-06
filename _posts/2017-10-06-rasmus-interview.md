@@ -40,7 +40,7 @@ Getting started quickly and being able to iterate with instant feedback is very 
 
 For local development I use a tool I've made called [Wright](https://github.com/porsager/wright), which launches Chrome in dev mode and then hot reloads anything (HTML/CSS/JS) any time I change a file. On my standard projects I have a TTS (Time To Screen) of around a half second without losing the current app state. It also auto-reloads any other connected browser, so testing on multiple devices and browsers is fairly trivial.
 
-For quick testing or mockups I would have a Wright playground project that I could get started fairly fast but sharing that code for review or feedback was quite annoying. I've since built flems.io (using Mithril, of course), which is a web playground with proper error feedback and logging. It saves everything in the url for easy sharing. It's such a delight being able to quickly test an assumption, so my first bookmark is currently [https://flems.io/mithril.bss](https://flems.io/mithril.bss) where I can test out things with my usual tools instantly.
+For quick testing or mockups I would have a Wright playground project that I could get started fairly fast but sharing that code for review or feedback was quite annoying. I've since built flems.io (using Mithril, of course), which is a web playground with proper error feedback and logging. It saves everything in the url for easy sharing. It's such a delight being able to quickly test an assumption, so my first bookmark is currently [https://flems.io/mithril.bss](https://flems.io/mithril,bss) where I can test out things with my usual tools instantly.
 
 ### Q. What do you enjoy the most about using Mithril?
 
