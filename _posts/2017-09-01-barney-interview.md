@@ -9,7 +9,7 @@ published: true
 
 ---
 
-### Q. What made you chose Mithril and how are you using it? 
+### Q. What made you choose Mithril and how are you using it? 
 
 Just over 3 years ago I joined a small startup as interface designer & developer for an application we would be making from scratch. Previously, I'd been working fixed-term contracts at agencies & small businesses and the choice of which 3rd party technologies I'd use (if I had a say at all) was always dependent on a notional idea of maintainability based on the familiarity of other engineers or received wisdom based on what seemed to be popular. 
 
