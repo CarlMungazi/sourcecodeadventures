@@ -74,3 +74,6 @@ Learning how to read source code has become a hobby of mine lately (and a someti
 
 **Reading the Loopback framework source code**
 - [Loopback insights](http://madpow.com/insights/2017/6/loopback)
+
+**Reading React.js source code**
+- [React codebase walkthrough](https://medium.com/@ericchurchill/the-react-source-code-a-beginners-walkthrough-i-7240e86f3030)
