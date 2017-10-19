@@ -8,4 +8,5 @@ exclude:
   - Gemfile.lock
 highlighter: rouge
 markdown: kramdown
-permalink: :categories/:title
+gems:
+  - jemoji
