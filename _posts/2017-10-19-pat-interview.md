@@ -62,7 +62,7 @@ Since I'm using a PostCSS-powered workflow with modular-css, I tend to use multi
 
 The simple, straightforward API. The predictable redraws. Not worrying about manually redrawing most of the time. Mithril has a lot of really pragmatic choices baked-in which I find incredibly valuable every single day I program in it.
 
-Also, `m.request()` and `m.route()` mean I generally don't have to go evaluate another tool or figure out which fetch polyfill sucks the least. I can just get on with my work and have tools that are often good and at the very least "good enough" to accomplish what I want without a bunch of research.
+Also, [`m.request()`](https://mithril.js.org/request.html) and [`m.route()`](https://mithril.js.org/route.html) mean I generally don't have to go evaluate another tool or figure out which fetch polyfill sucks the least. I can just get on with my work and have tools that are often good and at the very least "good enough" to accomplish what I want without a bunch of research.
 
 ### Q. And what do you enjoy the least?
 
@@ -72,7 +72,7 @@ My real answer is that I wish I understood the diffing algorithm and some of the
 
 ### Q. What would you say is the best way for a beginner to learn using Mithril?
 
-Check out the site, ask questions in Gitter, and play around! Having a small task in mind will help as aimless programming isn't generally very productive. Fortunately, Mithril is excellent for prototyping out small ideas because of the aforementioned batteries-included model.
+Check out the [site](https://mithril.js.org/), ask questions in [Gitter](https://gitter.im/MithrilJS/mithril.js), and play around! Having a small task in mind will help as aimless programming isn't generally very productive. Fortunately, Mithril is excellent for prototyping out small ideas because of the aforementioned batteries-included model.
 
 I honestly can't recommend Mithril's Gitter room strongly enough to both beginners and experienced programmers using Mithril. Some of the most insightful programming conversations around being had by genuinely wonderful people.
 
